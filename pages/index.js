@@ -1,14 +1,16 @@
-import { Box } from '@chakra-ui/react'
 import Head from 'next/head'
-import Image from 'next/image'
+import { Box, Button, Heading } from '@chakra-ui/react'
+import Link from 'next/link'
 import { Counter } from '../components/Counter'
-import styles from '../styles/Home.module.css'
+import { useRouter } from 'next/router'
 
 export default function Home({ name = 'bree' }) {
+  const router = useRouter()
   return (
     <Box display="flex" flexDir="column" alignItems="center" justifyContent="center" minH="70vh" borderWidth={2}>
-      <h1 style={{ marginBottom: '15px' }}>`Hello! My name is: {name}</h1>
+      <Heading size="sm" mb={4}>`Hello Redux!</Heading>
       <Counter />
+      <Button size="sm" onClick={() => router.push('/posts')}>Go to Posts</Button>
     </Box>
   )
 }
