@@ -1,7 +1,15 @@
 import { useSelector } from "react-redux";
 import Router, { useRouter } from 'next/router'
-import { Box, Heading, Container, Button, HStack } from "@chakra-ui/react";
+import { Box, Heading, Container, Button, HStack, Text } from "@chakra-ui/react";
 
+
+export const PostAuthor = ({ userId }) => {
+  const author = useSelector(state => state.users.find(user => user.id === userId))
+
+  return(
+    <Text fontSize="sm">{author ? author.name : 'Unknown Motherfucker'}</Text>
+  )
+}
 function SinglePostPage() {
   const { query } = useRouter()
   const post = useSelector(state => state.posts.find(post => post.id === query.id ))
@@ -20,6 +28,7 @@ function SinglePostPage() {
           <Button variant="link" size="md" onClick={() => Router.push('/posts/')} p={0}>Go Back</Button>
           <Button variant="link" size="md" onClick={() => Router.push({ pathname: '/posts/edit', query: { id: post.id } })} p={0}>Edit Post</Button>
         </HStack>
+        <PostAuthor userId={post.user} />
         <Heading size="md" mb={4}>Title: {post.title}</Heading>
         <Heading size="sm">Content: {post.content}</Heading>
       </Container>

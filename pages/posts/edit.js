@@ -24,7 +24,7 @@ function EditPost() {
   const onSave = () => {
     if(title && content) {
       dispatch(postUpdated({ id: query.id, title, content }))
-      Router.push(`/posts/${post.id}`)
+      Router.push(`/posts/${query.id}`)
     }
   }
 
